@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Aura | Valentine & 14 Months</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-red: #4a0404;
+            --burgundy: #800020;
+            --soft-pink: #fff0f3;
+            --gold: #c5a059;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--soft-pink); font-family: 'Inter', sans-serif; color: var(--deep-red); overflow-x: hidden; scroll-behavior: smooth; }
+        h1, h2 { font-family: 'Playfair Display', serif; }
+
+        /* --- Loading Screen --- */
+        #loader { position: fixed; inset: 0; background: var(--deep-red); display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 1s ease; }
+        .loader-heart { font-size: 50px; color: var(--gold); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); opacity: 0.5; } }
+
+        /* --- Section 1: Opening --- */
+        #section1 {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; color: white; padding: 20px;
+        }
+        .btn { padding: 16px 45px; border-radius: 50px; border: 1px solid var(--gold); cursor: pointer; background: transparent; color: white; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; }
+        .btn:hover { background: var(--gold); color: var(--deep-red); }
+
+        /* --- Section 2: Invitation & Slideshow --- */
+        #section2 { min-height: 100vh; display: none; padding: 60px 20px; background: var(--white); opacity: 0; transition: 1s; }
+        .invite-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; align-items: center; }
+        @media (min-width: 768px) { .invite-container { flex-direction: row-reverse; justify-content: space-between; } .invite-card, .slideshow { width: 48%; } }
+
+        .slideshow { position: relative; width: 100%; max-width: 450px; height: 550px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .slideshow img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .slideshow img.active { opacity: 1; }
+
+        .invite-card { padding: 40px; border: 1px solid #f0f0f0; border-radius: 20px; text-align: center; border: 1px solid rgba(197, 160, 89, 0.3); }
+        .invite-card h2 { color: var(--burgundy); font-size: 2.2rem; margin-bottom: 20px; }
+        .details { margin: 25px 0; font-weight: 600; font-size: 1.2rem; color: var(--deep-red); }
+
+        /* --- Section 3: 14 Months --- */
+        #section3 { padding: 100px 20px; background: var(--soft-pink); display: none; opacity: 0; transition: 1s; }
+        .anniv-header { text-align: center; margin-bottom: 60px; }
+        .anniv-thumb { width: 130px; height: 130px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; margin-bottom: 20px; }
+
+        .reason-card { background: white; margin-bottom: 20px; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); opacity: 0; transform: translateY(20px); transition: 0.6s ease; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .reason-card.reveal { opacity: 1; transform: translateY(0); }
+
+        #music-btn { position: fixed; bottom: 25px; right: 25px; background: white; border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 100; }
+    </style>
+</head>
+<body>
+
+    <div id="loader"><div class="loader-heart">♥</div></div>
+    <audio id="bg-music" loop><source src="music.mp3" type="audio/mpeg"></audio>
+    <div id="music-btn" onclick="toggleMusic()">🎵</div>
+
+    <section id="section1">
+        <h1>Will you be my Valentine?</h1>
+        <div style="display: flex; gap: 15px;">
+            <button class="btn" onclick="startApp()">Yes</button>
+            <button class="btn" onclick="startApp()">Yes ❤️</button>
+        </div>
+    </section>
+
+    <section id="section2">
+        <div class="invite-container">
+            <div class="slideshow" id="slideshow">
+                <img src="Valentines photo 1.jpg" class="active">
+                <img src="Valentines photo 2.jpg">
+                <img src="Valentines photo 3.jpg">
+            </div>
+            <div class="invite-card">
+                <h2>Happy Valentine’s Day <br>Aura Zakkaha, My Sweet</h2>
+                <p>You are invited to Sugar and Spice Restaurant</p>
+                <p class="details">Intercontinental Pondok Indah<br>6 PM</p>
+                <button class="btn" style="color:var(--burgundy); border-color:var(--burgundy);" onclick="showAnniv()">Continue</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="section3">
+        <div class="anniv-header">
+            <img src="months-photo.jpg" alt="Us" class="anniv-thumb">
+            <h2>Happy 14 Months My Baby</h2>
+        </div>
+        <div id="reasons-list"></div>
+    </section>
+
+    <script>
+        const reasons = [
+            "You are my favorite foodie partner, the one who turns every bite into a memory and every dessert into a little celebration of us.",
+            "Your gorgeous long hair feels like my own love story I get lost in, soft and beautiful in ways words can never fully capture.",
+            "No matter how simple the plan is, you make every adventure feel like something magical just because you’re beside me.",
+            "Through you I’ve discovered new places, new flavors, and new pieces of happiness I didn’t know existed before.",
+            "I will never forget the nights when my world felt like it was falling apart and your voice stayed on the phone, praying for me and holding my heart together.",
+            "The way you fall asleep listening to me talk makes me feel so loved in the quietest, most peaceful way.",
+            "Your kindness is so rare and pure that it restores my faith in people every single day.",
+            "Watching you eat happily and do your little happy dance is one of my favorite sights in this world.",
+            "Even when distance separates us, we still find ways to share simple meals together, proving that love doesn’t need a table to feel close, but just each other.",
+            "Your voice has a way of silencing the loud and painful noise in my head and reminding me that everything will be okay.",
+            "Your scent feels like walking through a peaceful garden, calm and comforting, a place where my heart feels at home.",
+            "Your laughter heals parts of me I didn’t even realize were hurting until you came into my life.",
+            "You believe in me when I doubt myself, and your faith in me becomes the strength that carries me forward.",
+            "Most of all, I love you because you make my ordinary life feel extraordinary, simply by existing in it and loving me the way you do."
+        ];
+
+        window.onload = () => {
+            setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 1000);
+        };
+
+        function startApp() {
+            document.getElementById('bg-music').play().catch(() => {});
+            fade('section1', 'section2');
+            startSlideshow();
+        }
+
+        function showAnniv() {
+            fade('section2', 'section3');
+            const list = document.getElementById('reasons-list');
+            reasons.forEach((text, i) => {
+                const card = document.createElement('div');
+                card.className = 'reason-card';
+                card.innerHTML = `<span style="color:var(--gold); font-weight:bold;">${i+1}.</span> ${text}`;
+                list.appendChild(card);
+                setTimeout(() => card.classList.add('reveal'), (i * 400) + 500);
+            });
+        }
+
+        function fade(out, on) {
+            document.getElementById(out).style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById(out).style.display = 'none';
+                document.getElementById(on).style.display = 'block';
+                setTimeout(() => document.getElementById(on).style.opacity = '1', 50);
+            }, 800);
+        }
+
+        function startSlideshow() {
+            const imgs = document.querySelectorAll('#slideshow img');
+            let i = 0;
+            setInterval(() => {
+                imgs[i].classList.remove('active');
+                i = (i + 1) % imgs.length;
+                imgs[i].classList.add('active');
+            }, 3500);
+        }
+
+        function toggleMusic() {
+            const m = document.getElementById('bg-music');
+            m.paused ? m.play() : m.pause();
+        }
+    </script>
+</body>
+</html>
