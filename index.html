@@ -49,7 +49,7 @@
     <div id="loader"><div class="loader-heart">♥</div></div>
     
     <audio id="bg-music" loop>
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="Amore Mio Aiutami (Main Theme) ● Piero Piccioni (High Quality Audio).mp3" type="audio/mpeg">
     </audio>
     <div id="music-toggle" onclick="toggleMusic()">🎵</div>
 
@@ -106,7 +106,7 @@
 
         function startApp() { 
             const music = document.getElementById('bg-music');
-            music.play().catch(e => console.log("Audio play failed"));
+            music.play().catch(e => console.log("Audio play failed: ensure the filename is exact."));
             fade('section1', 'section2'); 
             startSlideshow(); 
         }
